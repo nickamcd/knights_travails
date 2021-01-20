@@ -24,4 +24,10 @@ class GameBoard
   def visited?(position)
     board[position[0]][position[1]]
   end
+
+  def get_path(piece)
+    p piece.position
+    return 0 if piece.parent.nil?
+    get_path(piece.parent) + 1
+  end
 end

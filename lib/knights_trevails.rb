@@ -9,30 +9,22 @@ def knight_moves(start, target, board)
 
   queue.push(curr)
 
+  turns = 0
+
   until queue.empty?
     curr = queue.shift
 
     if curr.position == target
-      puts "here"
+      puts "You made it in #{board.get_path(curr)} moves!"
       return curr.position
     end
 
-    curr.get_moves.each { |move| queue.push(Knight.new(move)) unless board.visited?(move) }
+    curr.get_moves.each { |move| queue.push(Knight.new(move, curr)) unless board.visited?(move) }
 
     board.visit(curr.position)
-
-    board.print_board
-    puts "testing"
-    puts
   end
 end
 
 test_board = GameBoard.new
 
-test_board.print_board
-
-puts
-
-knight_moves([3, 3], [5, 1], test_board)
-
-test_board.print_board
+knight_moves([3, 3], [4, 3], test_board)

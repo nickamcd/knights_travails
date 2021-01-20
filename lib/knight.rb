@@ -9,10 +9,11 @@ class Knight
     [-2, -1], [-2, 1] # Left 2 Up 1, Left 2 Down 1
   ]
   
-  attr_reader :position
+  attr_reader :position, :parent
   
-  def initialize(position)
+  def initialize(position, parent = nil)
     @position = position
+    @parent = parent
   end
 
   def get_moves
