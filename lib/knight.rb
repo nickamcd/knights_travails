@@ -9,11 +9,14 @@ class Knight
     [-2, -1], [-2, 1] # Left 2 Up 1, Left 2 Down 1
   ]
   
-  attr_reader :position, :children
+  attr_reader :position
   
   def initialize(position)
     @position = position
-    @children = LEGAL_MOVES.map { |move| [position[0] + move[0], position[1] + move[1]]}
+  end
+
+  def get_moves
+    LEGAL_MOVES.map { |move| [position[0] + move[0], position[1] + move[1]]}
                            .keep_if { |move| GameBoard.valid_move?(move) }
   end
 end
