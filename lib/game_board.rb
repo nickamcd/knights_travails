@@ -17,7 +17,7 @@ class GameBoard
     end
   end
 
-  def visited(position)
+  def visit(position)
     board[position[0]][position[1]] = true
   end
 

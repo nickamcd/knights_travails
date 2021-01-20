@@ -4,40 +4,35 @@ require_relative "knight"
 def knight_moves(start, target, board)
   queue = []
 
-  queue.push(start)
+  curr = Knight.new(start)
+  board.visit(curr.position)
 
-  curr = Knight.new(queue.shift)
+  queue.push(curr)
 
-  until curr == target
-    curr.get_moves.each { |move| queue.push(move) unless board.visited?(move) }
+  until queue.empty?
+    curr = queue.shift
 
-    board.visited(curr)
+    if curr.position == target
+      puts "here"
+      return curr.position
+    end
 
+    curr.get_moves.each { |move| queue.push(Knight.new(move)) unless board.visited?(move) }
 
+    board.visit(curr.position)
+
+    board.print_board
+    puts "testing"
+    puts
   end
 end
 
 test_board = GameBoard.new
 
-test_knight = Knight.new([3,3])
-test_knight2 = Knight.new([0, 0])
-
-test_knight.get_moves.each do |move|
-  p move
-end
-
-puts
-
-test_knight2.get_moves.each do |move|
-  p move
-end
-
 test_board.print_board
 
 puts
 
-test_board.visited([2, 2])
-
-knight_moves([3, 3], [4, 3], test_board)
+knight_moves([3, 3], [5, 1], test_board)
 
 test_board.print_board
